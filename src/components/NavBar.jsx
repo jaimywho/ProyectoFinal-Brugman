@@ -1,24 +1,25 @@
 import CartWidget from "./cartWidget";
+import { NavLink } from "react-router";
 
 function NavBar() {
   return (
     <>
       <nav className="navbar">
         <div className="navbar-left">
-          <img src="/perro.png" alt="Logo" className="logo" />
+          <NavLink to="/">
+            <img src="/perro.png" alt="Logo" className="logo" />
+          </NavLink>
         </div>
 
         <ul className="nav-links">
           <ul>
-            <a href="https://www.google.com/" target="_blank">
-              Inicio
-            </a>
+            <NavLink to="/category/comida">Comida</NavLink>
           </ul>
           <ul>
-            <a href="https://www.google.com/">Productos</a>
+            <NavLink to="/category/accesorios">Accesorios</NavLink>
           </ul>
           <ul>
-            <a href="https://www.google.com/">Contacto</a>
+            <NavLink to="/category/juguetes">Juguetes</NavLink>
           </ul>
         </ul>
 

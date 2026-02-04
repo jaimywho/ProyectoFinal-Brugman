@@ -1,32 +1,29 @@
-import { useState, useEffect } from "react";
-import products from "../data/products";
+import { useState } from "react";
 
-function ItemCount({ stock, initial = 1 }) {
-  const [count, setCount] = useState(1);
+function ItemCount({ stock, initial = 1, onCountChange }) {
+  const [count, setCount] = useState(initial);
 
   function handleSubtract() {
     if (count > 1) {
-      setCount(count - 1);
+      const next = count - 1;
+      setCount(next);
+      if (typeof onCountChange === "function") onCountChange(next);
     }
   }
 
   function handleAdd() {
-    console.log("Add clicked - count:", count, "stock:", stock); // Debug
     if (count < stock) {
-      setCount(count + 1);
-    } else {
-      console.log("Can't add more - at stock limit");
+      const next = count + 1;
+      setCount(next);
+      if (typeof onCountChange === "function") onCountChange(next);
     }
   }
 
   return (
-    <div>
-      <div>
-        <button onClick={handleSubtract}>-</button>
-        <span>{count}</span>
-        <button onClick={handleAdd}>+</button>
-      </div>
-      <button>Añadir al carro</button>
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <button onClick={handleSubtract}>-</button>
+      <span>{count}</span>
+      <button onClick={handleAdd}>+</button>
     </div>
   );
 }

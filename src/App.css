@@ -3,7 +3,6 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  border: #61dafbaa;
 }
 
 .logo {
@@ -75,8 +74,4 @@ a.active {
 
 .nav-links a {
   text-decoration: none;
-}
-
-.list div {
-  border: #646cffaa;
 }

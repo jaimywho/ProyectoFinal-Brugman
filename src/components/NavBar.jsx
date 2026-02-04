@@ -1,4 +1,4 @@
-import CartWidget from "./CartWidget";
+import CartWidget from "./cartWidget";
 import { NavLink } from "react-router";
 
 function NavBar() {
@@ -23,7 +23,9 @@ function NavBar() {
           </ul>
         </ul>
 
-        <CartWidget />
+        <NavLink to="/cart">
+          <CartWidget />
+        </NavLink>
       </nav>
     </>
   );

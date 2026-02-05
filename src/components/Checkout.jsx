@@ -1,18 +1,39 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useCart } from "../context/CartContext";
+import { createBuyOrder } from "../data/firebase";
 
 function Checkout() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
-  const { clearCart } = useCart();
+  const { cart, clearCart } = useCart();
 
-  function handlePayment(e) {
+  const totalPrice = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
+
+  async function handlePayment(e) {
     e.preventDefault();
     const orderId = `ORD-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
-    clearCart();
-    navigate(`/checkout/confirmation/${orderId}`);
+
+    const buyOrder = {
+      id: orderId,
+      buyer: { name, email },
+      items: cart,
+      total: totalPrice,
+      date: new Date(),
+    };
+
+    try {
+      await createBuyOrder(buyOrder);
+      clearCart();
+      navigate(`/checkout/confirmation/${orderId}`);
+    } catch (error) {
+      // error handling removed per request (no console.error or alert)
+      return;
+    }
   }
 
   return (

@@ -1,9 +1,9 @@
 import { useParams } from "react-router";
 import ItemCount from "./ItemCount";
 import { useState, useEffect } from "react";
-import { getData, getItemData } from "../data/mockService";
 import "../App.css";
 import { useCart } from "../context/CartContext";
+import { getItemData } from "../data/firebase";
 
 function ItemDetailContainer() {
   const { itemid } = useParams();
@@ -20,7 +20,7 @@ function ItemDetailContainer() {
 
   useEffect(() => {
     getItemData(itemid).then((response) => setProduct(response));
-  }, []);
+  }, [itemid]);
 
   return (
     <section>

@@ -11,6 +11,7 @@ import { CartProvider } from "./context/CartContext";
 import CartContent from "./components/CartContent";
 import Checkout from "./components/Checkout";
 import CheckoutConfirmation from "./components/CheckoutConfirmation";
+import { exportProductsToFirestore } from "./data/firebase";
 
 function App() {
   const [page, setPage] = useState("home");

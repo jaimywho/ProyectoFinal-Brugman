@@ -1,8 +1,8 @@
 import products from "../data/products";
 import Item from "./Item";
-import { getCategoryData, getData, getItemData } from "../data/mockService";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { getItemData, getData, getCategoryData } from "../data/firebase";
 
 function ItemListContainer() {
   const [products, setProducts] = useState([]);
@@ -22,8 +22,8 @@ function ItemListContainer() {
       {products.map((item) => {
         return (
           <Item
-            key={item.itemid}
-            itemid={item.itemid}
+            key={item.id}
+            itemid={item.id}
             name={item.name}
             image={item.image}
             price={item.price}

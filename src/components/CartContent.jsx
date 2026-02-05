@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { useCart } from "../context/CartContext";
 
 function CartContent() {
-  const { cart, clearCart } = useCart();
+  const { cart, clearCart, removeItem } = useCart();
 
   const totalPrice = cart.reduce(
     (s, p) => s + (p.price || 0) * (p.quantity || 0),
@@ -19,7 +19,7 @@ function CartContent() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "100px 1fr 120px 100px",
+              gridTemplateColumns: "100px 1fr 120px 100px 50px",
               gap: 12,
               alignItems: "center",
               fontWeight: 700,
@@ -34,7 +34,7 @@ function CartContent() {
                 key={item.id}
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "100px 1fr 120px 100px",
+                  gridTemplateColumns: "100px 1fr 120px 100px 50px",
                   gap: 12,
                   alignItems: "center",
                   marginBottom: 12,
@@ -60,6 +60,25 @@ function CartContent() {
                 <div style={{ fontWeight: 700 }}>
                   ${((item.price || 0) * (item.quantity || 0)).toFixed(2)}
                 </div>
+                <button
+                  type="button"
+                  onClick={() => removeItem(item.id)}
+                  style={{
+                    background: "#FF474D",
+                    color: "white",
+                    border: "2px solid red",
+                    borderRadius: "4px",
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer",
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    padding: "0px",
+                    lineHeight: "1",
+                  }}
+                >
+                  ×
+                </button>
               </li>
             ))}
           </ul>
@@ -90,7 +109,7 @@ function CartContent() {
               Eliminar todos los productos
             </button>
             <Link to="/checkout">
-              <button>Ir a pago</button>
+              <button>Ir a pagar</button>
             </Link>
           </div>
         </div>
